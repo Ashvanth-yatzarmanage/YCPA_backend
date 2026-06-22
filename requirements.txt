@@ -56,7 +56,7 @@ requests-cache==1.2.0     # Stable
 geopandas==1.1.1          # Latest stable for production
 shapely==2.1.2            # Stable - Geometry operations
 rasterio==1.4.4           # Latest stable
-pyproj==3.7.2             # Latest stable
+pyproj==3.7.1             # Latest stable
 fiona==1.10.1             # Latest stable
 
 # -----------------------------
@@ -91,3 +91,26 @@ pytest-cov==6.0.0         # Latest: Coverage reporting
 
 openpyxl
 rich
+
+fastapi==0.111.0
+uvicorn[standard]==0.29.0
+SQLAlchemy==2.0.30
+alembic==1.13.1
+psycopg2-binary==2.9.9
+
+pydantic==2.10.6
+pydantic-settings==2.7.1
+
+python-dotenv==1.0.1
+python-dateutil==2.9.0.post0
+
+python-jose==3.3.0
+passlib[bcrypt]==1.7.4
+
+python-multipart==0.0.9
+email-validator==2.3.0
+
+openpyxl==3.1.5
+reportlab==4.2.2
+python-docx==1.1.2
+aiosmtplib==4.0.2
