@@ -1,33 +1,22 @@
-FROM python:3.10
+FROM python:3.10-slim
 
+# Prevent Python from buffering stdout/stderr
 ENV PYTHONUNBUFFERED=1
+ENV PYTHONDONTWRITEBYTECODE=1
 
-COPY --from=ghcr.io/astral-sh/uv:0.9.26 /uv /uvx /bin/
+WORKDIR /app
 
-ENV UV_COMPILE_BYTECODE=1
+# Install dependencies
+COPY requirements.txt .
 
-ENV UV_LINK_MODE=copy
+RUN pip install --no-cache-dir --upgrade pip \
+    && pip install --no-cache-dir -r requirements.txt
 
-WORKDIR /app/
+# Copy the application
+COPY . .
 
-ENV PATH="/app/.venv/bin:$PATH"
+# Expose the port Render provides
+EXPOSE 8000
 
-RUN --mount=type=cache,target=/root/.cache/uv \
-    --mount=type=bind,source=uv.lock,target=uv.lock \
-    --mount=type=bind,source=pyproject.toml,target=pyproject.toml \
-    uv sync --frozen --no-install-workspace --package app
-
-COPY ./backend/scripts /app/backend/scripts
-
-COPY ./backend/pyproject.toml ./backend/alembic.ini /app/backend/
-
-COPY ./backend/app /app/backend/app
-
-RUN --mount=type=cache,target=/root/.cache/uv \
-    --mount=type=bind,source=uv.lock,target=uv.lock \
-    --mount=type=bind,source=pyproject.toml,target=pyproject.toml \
-    uv sync --frozen --package app
-
-WORKDIR /app/backend/
-
-CMD ["fastapi", "run", "--workers", "4", "app/main.py"]
+# Start the application
+CMD ["python", "run.py"]
