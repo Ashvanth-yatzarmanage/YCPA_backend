@@ -1,0 +1,27 @@
+__pycache__
+app.egg-info
+*.pyc
+.mypy_cache
+.coverage
+htmlcov
+.cache
+.venv
+.env
+# Alembic
+alembic/__pycache__/
+alembic/versions/__pycache__/
+# ImageMagick / PostScript junk
+*.ps
+sa
+# Image/ImageMagick artifacts
+*.eps
+*.ai
+*.pdf
+.idea
+
+
+logs
+tmp_ifc/
+
+team-task/
+.env.example
